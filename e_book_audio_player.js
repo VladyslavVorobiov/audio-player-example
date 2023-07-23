@@ -20,13 +20,14 @@ function initAudioPlayer() {
 
     eBookAudioPlayer.initListeners();
 
-    setTimeout(() => {
-        eBookAudioPlayer.toggleLoading(true);
-    }, 1000);
+    // showcase loading:
+    // setTimeout(() => {
+    //     eBookAudioPlayer.toggleLoading(true);
+    // }, 1000);
 
-    setTimeout(() => {
-        eBookAudioPlayer.toggleLoading(false);
-    }, 5000);
+    // setTimeout(() => {
+    //     eBookAudioPlayer.toggleLoading(false);
+    // }, 5000);
 
 };
 
@@ -40,6 +41,7 @@ function AudioPlayerConstructor(id) {
     this.playPauseButtonRef = this.audioPlayerRef.querySelector('.play-pause-btn');
     this.controlsWrapperRef = this.audioPlayerRef.querySelector('.controls');
     this.playPauseButtonPath = this.playPauseButtonRef.querySelector('path');
+    this.volumeButtonRef = this.audioPlayerRef.querySelector('.volume__button');
 };
 
 AudioPlayerConstructor.prototype.setCurrentTime = setCurrentTime;
@@ -51,17 +53,17 @@ AudioPlayerConstructor.prototype.removeListeners = removeListeners;
 AudioPlayerConstructor.prototype.playClicked = playClicked;
 AudioPlayerConstructor.prototype.pauseClicked = pauseClicked;
 
-// time type: string
+// time type: string like '2:59'
 function setCurrentTime(time) {
     this.currentTimeRef.textContent = time;
 };
 
-// time type: string
+// time type: string like '10:00'
 function setTotalTime(time) {
     this.totalTimeRef.textContent = time;
 };
 
-// progress type: number
+// progress type: number between 0 and 100
 function setProgress(progress) {
 
     if(progress < 0) {
@@ -79,21 +81,23 @@ function setProgress(progress) {
 function toggleLoading(loading) {
     if(loading) {
         this.loaderRef.style.display = 'block';
-         this.playPauseButtonRef.disabled = true;
+        this.playPauseButtonRef.disabled = true;
         this.controlsWrapperRef.classList.add('disabled');
     } else {
         this.loaderRef.style.display = 'none';
-         this.playPauseButtonRef.disabled = false;
+        this.playPauseButtonRef.disabled = false;
         this.controlsWrapperRef.classList.remove('disabled');
     }
 };
 
 function initListeners() {
     this.playPauseButtonRef.addEventListener('click', playPauseHandler.bind(this));
+    this.volumeButtonRef.addEventListener('click', volumeClickHandler.bind(this));
 }
 
 function removeListeners() {
     this.playPauseButtonRef.removeEventListener('click', playPauseHandler);
+    this.volumeButtonRef.removeEventListener('click', volumeClickHandler);
 }
 
 function playPauseHandler() {
@@ -106,6 +110,10 @@ function playPauseHandler() {
         this.playPauseButtonPath.setAttribute('d', PLAY_BUTTON_PATH);
         this.pauseClicked();
     }
+}
+
+function volumeClickHandler() {
+    this.volumeButtonRef.classList.toggle('opened');
 }
 
 function playClicked() {

@@ -144,11 +144,17 @@
 }
 
 .ebook-audio-player .volume .volume__button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
     cursor: pointer;
 }
 
-.ebook-audio-player .volume .volume__button.open path {
-    fill: #44bfa3; 
+.ebook-audio-player .volume .volume__button.opened path {
+    fill: #44bfa3;
 }
 
 .ebook-audio-player .volume .volume__controls {
