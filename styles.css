@@ -27,12 +27,19 @@
     display: block; 
 }
 
-.ebook-audio-player .play-pause-btn:hover {
-    cursor: pointer; 
+.ebook-audio-player .play-pause-btn {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    cursor: pointer;
 }
 
 .ebook-audio-player .play-pause-btn.disabled:hover {
-    cursor: default; 
+    cursor: default;
+    pointer-events: none;
 }
 
 .ebook-audio-player .play-pause-btn.disabled svg path {
