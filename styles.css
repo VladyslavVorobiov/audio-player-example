@@ -34,16 +34,19 @@
     width: auto;
     overflow: visible;
     background: transparent;
+}
+
+.ebook-audio-player .play-pause-btn:not([disabled]) {
     cursor: pointer;
 }
 
-.ebook-audio-player .play-pause-btn.disabled:hover {
+.ebook-audio-player .play-pause-btn[disabled]:hover {
     cursor: default;
     pointer-events: none;
 }
 
-.ebook-audio-player .play-pause-btn.disabled svg path {
-    fill: #DADADA; 
+.ebook-audio-player .play-pause-btn[disabled] svg path {
+    fill: #DADADA;
 }
 
 .ebook-audio-player .loading {

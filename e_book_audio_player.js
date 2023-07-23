@@ -79,11 +79,11 @@ function setProgress(progress) {
 function toggleLoading(loading) {
     if(loading) {
         this.loaderRef.style.display = 'block';
-        this.playPauseButtonRef.classList.add('disabled');
+         this.playPauseButtonRef.disabled = true;
         this.controlsWrapperRef.classList.add('disabled');
     } else {
         this.loaderRef.style.display = 'none';
-        this.playPauseButtonRef.classList.remove('disabled');
+         this.playPauseButtonRef.disabled = false;
         this.controlsWrapperRef.classList.remove('disabled');
     }
 };
