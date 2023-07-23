@@ -69,6 +69,10 @@
     position: relative; 
 }
 
+.ebook-audio-player .slider.volume__slider {
+    background-color: #d8d8d8;
+}
+
 .ebook-audio-player .slider .gap-progress {
     background-color: #44bfa3;
     border-radius: inherit;
@@ -186,7 +190,7 @@
 }
 
 .ebook-audio-player .volume .volume__controls.bottom {
-    bottom: -164px;
+    bottom: -150px;
     left: -3px; 
 }
 

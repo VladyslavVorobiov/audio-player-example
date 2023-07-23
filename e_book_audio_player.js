@@ -42,6 +42,7 @@ function AudioPlayerConstructor(id) {
     this.controlsWrapperRef = this.audioPlayerRef.querySelector('.controls');
     this.playPauseButtonPath = this.playPauseButtonRef.querySelector('path');
     this.volumeButtonRef = this.audioPlayerRef.querySelector('.volume__button');
+    this.volumeControlsRef = this.audioPlayerRef.querySelector('.volume__controls');
 };
 
 AudioPlayerConstructor.prototype.setCurrentTime = setCurrentTime;
@@ -114,6 +115,7 @@ function playPauseHandler() {
 
 function volumeClickHandler() {
     this.volumeButtonRef.classList.toggle('opened');
+    this.volumeControlsRef.classList.toggle('hidden');
 }
 
 function playClicked() {
