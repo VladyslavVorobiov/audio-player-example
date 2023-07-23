@@ -47,9 +47,9 @@ AudioPlayerConstructor.prototype.setTotalTime = setTotalTime;
 AudioPlayerConstructor.prototype.setProgress = setProgress;
 AudioPlayerConstructor.prototype.toggleLoading = toggleLoading;
 AudioPlayerConstructor.prototype.initListeners = initListeners;
+AudioPlayerConstructor.prototype.removeListeners = removeListeners;
 AudioPlayerConstructor.prototype.playClicked = playClicked;
 AudioPlayerConstructor.prototype.pauseClicked = pauseClicked;
-
 
 // time type: string
 function setCurrentTime(time) {
@@ -89,18 +89,23 @@ function toggleLoading(loading) {
 };
 
 function initListeners() {
-    this.playPauseButtonRef.addEventListener('click', function () {
+    this.playPauseButtonRef.addEventListener('click', playPauseHandler.bind(this));
+}
 
-        var dAttribute = eBookAudioPlayer.playPauseButtonPath.getAttribute('d');
+function removeListeners() {
+    this.playPauseButtonRef.removeEventListener('click', playPauseHandler);
+}
 
-        if(dAttribute === PLAY_BUTTON_PATH) {
-            eBookAudioPlayer.playPauseButtonPath.setAttribute('d', PAUSE_BUTTON_PATH);
-            eBookAudioPlayer.playClicked();
-        } else {
-            eBookAudioPlayer.playPauseButtonPath.setAttribute('d', PLAY_BUTTON_PATH);
-            eBookAudioPlayer.pauseClicked();
-        }
-    });
+function playPauseHandler() {
+    var dAttribute = this.playPauseButtonPath.getAttribute('d');
+
+    if(dAttribute === PLAY_BUTTON_PATH) {
+        this.playPauseButtonPath.setAttribute('d', PAUSE_BUTTON_PATH);
+        this.playClicked();
+    } else {
+        this.playPauseButtonPath.setAttribute('d', PLAY_BUTTON_PATH);
+        this.pauseClicked();
+    }
 }
 
 function playClicked() {
