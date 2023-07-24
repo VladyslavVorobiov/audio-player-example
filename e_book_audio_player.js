@@ -125,3 +125,11 @@ function playClicked() {
 function pauseClicked() {
     //TODO place your logic here on pause button clicked
 }
+
+function progressClicked() {
+    //TODO place your logic here on progress clicked
+}
+
+function volumeLevelClicked() {
+    //TODO place your logic here on volume level clicked
+}
