@@ -36,7 +36,7 @@ function AudioPlayerConstructor(id) {
 
     this.currentTimeRef = this.audioPlayerRef.querySelector('.controls__current-time');
     this.totalTimeRef = this.audioPlayerRef.querySelector('.controls__total-time');
-    this.progressRef = this.audioPlayerRef.querySelector('.controls__progress.gap-progress');
+    this.progressRef = this.audioPlayerRef.querySelector('.controls__progress-range');
     this.loaderRef = this.audioPlayerRef.querySelector('.loading');
     this.playPauseButtonRef = this.audioPlayerRef.querySelector('.play-pause-btn');
     this.controlsWrapperRef = this.audioPlayerRef.querySelector('.controls');
@@ -66,16 +66,7 @@ function setTotalTime(time) {
 
 // progress type: number between 0 and 100
 function setProgress(progress) {
-
-    if(progress < 0) {
-        progress = 0;
-    }
-
-    if(progress > 100) {
-        progress = 100;
-    }
-
-    this.progressRef.style.width = progress + '%';
+    this.progressRef.value = progress;
 };
 
 // loading type: boolean
@@ -83,10 +74,12 @@ function toggleLoading(loading) {
     if(loading) {
         this.loaderRef.style.display = 'block';
         this.playPauseButtonRef.disabled = true;
+        this.progressRef.disabled = true;
         this.controlsWrapperRef.classList.add('disabled');
     } else {
         this.loaderRef.style.display = 'none';
         this.playPauseButtonRef.disabled = false;
+        this.progressRef.disabled = false;
         this.controlsWrapperRef.classList.remove('disabled');
     }
 };

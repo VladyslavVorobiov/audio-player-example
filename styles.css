@@ -69,27 +69,11 @@
     position: relative; 
 }
 
-.ebook-audio-player .slider.volume__slider {
-    background-color: #d8d8d8;
+.ebook-audio-player .volume__slider {
+    flex-grow: 1;
+    cursor: pointer;
+    position: relative; 
 }
-
-.ebook-audio-player .slider .gap-progress {
-    background-color: #44bfa3;
-    border-radius: inherit;
-    position: absolute;
-    pointer-events: none; 
-}
-
-.ebook-audio-player .slider .gap-progress .pin {
-    height: 16px;
-    width: 16px;
-    border-radius: 8px;
-    background-color: #44bfa3;
-    position: absolute;
-    pointer-events: all;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.32); 
-}
-
 
 .ebook-audio-player .controls {
     font-family: "Roboto", sans-serif;
@@ -117,27 +101,34 @@
     cursor: default;
 }
 
-.ebook-audio-player .controls.disabled .progress__pin {
-    background-color: #DADADA;
-}
-
-.ebook-audio-player .controls .controls__slider {
+.ebook-audio-player .controls .controls__progress-range {
+    flex: 1;
     margin-left: 16px;
     margin-right: 16px;
-    border-radius: 2px;
-    height: 4px; 
+    -webkit-appearance: none;
+    background: #44bfa3;
+    border-radius: 10px;
+    height: 10px;
+}
+.ebook-audio-player .controls .controls__progress-range[disabled] {
+    background: #DADADA;
 }
 
-.ebook-audio-player .controls .controls__slider .controls__progress {
-    width: 0;
-    height: 100%; 
+.ebook-audio-player .controls .controls__progress-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: #44bfa3;
+    border: 1px solid #37927e;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    transition: 0.2s background;
+    cursor: pointer;
 }
 
-.ebook-audio-player .controls .controls__slider .controls__progress .progress__pin {
-    right: -8px;
-    top: -6px; 
+.ebook-audio-player .controls .controls__progress-range[disabled]::-webkit-slider-thumb {
+    border: 1px solid #DADADA;
+    background: #DADADA;
 }
-
 
 .ebook-audio-player .controls span {
     cursor: default; 
@@ -202,12 +193,27 @@
 }
 
 .ebook-audio-player .volume .volume__controls .volume__slider .volume__progress {
-    bottom: 0;
-    height: 100%;
-    width: 6px; 
+    -webkit-appearance: none;
+    -webkit-transform: rotate(90deg);
+    background: #44bfa3;
+    height: 8px;
+    width: 110px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50px;
+    left: -52px;
+    margin: 0;
+    padding: 0;
 }
 
-.ebook-audio-player .volume .volume__controls .volume__slider .volume__progress .volume__pin {
-    left: -5px;
-    top: -8px;
+.ebook-audio-player .volume .volume__controls .volume__slider .volume__progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: #44bfa3;
+    border: 1px solid #37927e;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    transition: 0.2s background;
+    cursor: pointer;
 }
+
