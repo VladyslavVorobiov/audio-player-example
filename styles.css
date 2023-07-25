@@ -194,7 +194,7 @@
 
 .ebook-audio-player .volume .volume__controls .volume__slider .volume__progress {
     -webkit-appearance: none;
-    -webkit-transform: rotate(90deg);
+    -webkit-transform: rotate(-90deg);
     background: #44bfa3;
     height: 8px;
     width: 110px;
