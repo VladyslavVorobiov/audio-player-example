@@ -51,8 +51,10 @@ AudioPlayerConstructor.prototype.setProgress = setProgress;
 AudioPlayerConstructor.prototype.toggleLoading = toggleLoading;
 AudioPlayerConstructor.prototype.initListeners = initListeners;
 AudioPlayerConstructor.prototype.removeListeners = removeListeners;
-AudioPlayerConstructor.prototype.playClicked = playClicked;
-AudioPlayerConstructor.prototype.pauseClicked = pauseClicked;
+AudioPlayerConstructor.prototype.onPlayClicked = onPlayClicked;
+AudioPlayerConstructor.prototype.onPauseClicked = onPauseClicked;
+AudioPlayerConstructor.prototype.onProgressChanged = onProgressChanged;
+
 
 // time type: string like '2:59'
 function setCurrentTime(time) {
@@ -87,11 +89,13 @@ function toggleLoading(loading) {
 function initListeners() {
     this.playPauseButtonRef.addEventListener('click', playPauseHandler.bind(this));
     this.volumeButtonRef.addEventListener('click', volumeClickHandler.bind(this));
+    this.progressRef.addEventListener('change', progressChangesHandler.bind(this));
 }
 
 function removeListeners() {
     this.playPauseButtonRef.removeEventListener('click', playPauseHandler);
     this.volumeButtonRef.removeEventListener('click', volumeClickHandler);
+    this.progressRef.removeEventListener('change', progressChangesHandler);
 }
 
 function playPauseHandler() {
@@ -99,10 +103,10 @@ function playPauseHandler() {
 
     if(dAttribute === PLAY_BUTTON_PATH) {
         this.playPauseButtonPath.setAttribute('d', PAUSE_BUTTON_PATH);
-        this.playClicked();
+        this.onPlayClicked();
     } else {
         this.playPauseButtonPath.setAttribute('d', PLAY_BUTTON_PATH);
-        this.pauseClicked();
+        this.onPauseClicked();
     }
 }
 
@@ -111,16 +115,21 @@ function volumeClickHandler() {
     this.volumeControlsRef.classList.toggle('hidden');
 }
 
-function playClicked() {
+function progressChangesHandler(event) {
+    this.onProgressChanged(+event.target.value);
+}
+
+function onPlayClicked() {
     //TODO place your logic here on play button clicked
 }
 
-function pauseClicked() {
+function onPauseClicked() {
     //TODO place your logic here on pause button clicked
 }
 
-function progressClicked() {
-    //TODO place your logic here on progress clicked
+// progress type: number between 0 and 100
+function onProgressChanged(progress) {
+    //TODO place your logic here on progress changed
 }
 
 function volumeLevelClicked() {
