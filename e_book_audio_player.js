@@ -4,6 +4,9 @@ const DEFAULT_PROGRESS = 0;
 const DEFAULT_VOLUME_LEVEL = 50;
 const PLAY_BUTTON_APPEARANCE = 'M18 12L0 24V0';
 const PAUSE_BUTTON_APPEARANCE = 'M0 0h6v24H0zM12 0h6v24h-6z';
+const VOLUME_LEVEL_ZERO = 'M0 7.667v8h5.333L12 22.333V1L5.333 7.667';
+const VOLUME_LEVEL_MIDDLE = 'M0 7.667v8h5.333L12 22.333V1L5.333 7.667M17.333 11.373C17.333 9.013 16 6.987 14 6v10.707c2-.947 3.333-2.987 3.333-5.334z';
+const VOLUME_LEVEL_FULL = 'M14.667 0v2.747c3.853 1.146 6.666 4.72 6.666 8.946 0 4.227-2.813 7.787-6.666 8.934v2.76C20 22.173 24 17.4 24 11.693 24 5.987 20 1.213 14.667 0zM18 11.693c0-2.36-1.333-4.386-3.333-5.373v10.707c2-.947 3.333-2.987 3.333-5.334zm-18-4v8h5.333L12 22.36V1.027L5.333 7.693H0z';
 const WRAPPER_NAME = '.ebook-audio-player-wrapper';
 const PLAYER_NAME = '.ebook-audio-player';
 const VOLUME_SLIDER_HEIGHT = 135;
@@ -75,6 +78,7 @@ class AudioPlayerConstructor {
         this.controlsWrapperRef = this.audioPlayerRef.querySelector('.controls');
         this.playPauseButtonPath = this.playPauseButtonRef.querySelector('path');
         this.volumeButtonRef = this.audioPlayerRef.querySelector('.volume__button');
+        this.volumeButtonPath = this.volumeButtonRef.querySelector('path');
         this.volumeControlsRef = this.audioPlayerRef.querySelector('.volume__controls');
         this.volumeLevelRef = this.audioPlayerRef.querySelector('.volume__progress');
 
@@ -106,6 +110,7 @@ class AudioPlayerConstructor {
     // level type: number between 0 and 100
     setVolumeLevel(level) {
         this.volumeLevelRef.value = level;
+        this.setVolumeButtonView(level);
     }
 
     // loading type: boolean
@@ -178,6 +183,22 @@ class AudioPlayerConstructor {
             this.volumeControlsRef.classList.remove('bottom');
         }
     }
+
+    setVolumeButtonView(level) {
+        switch (true) {
+            case level >= 0 && level <= 5:
+                this.volumeButtonPath.setAttribute('d', VOLUME_LEVEL_ZERO);
+                break;
+
+            case level > 5 && level <= 50:
+                this.volumeButtonPath.setAttribute('d', VOLUME_LEVEL_MIDDLE);
+                break;
+
+            case level > 50 && level <= 100:
+                this.volumeButtonPath.setAttribute('d', VOLUME_LEVEL_FULL);
+                break;
+        }
+    }
 };
 
 function playPauseHandler() {
@@ -208,6 +229,7 @@ function progressChangesHandler(event) {
 }
 
 function volumeLevelChangesHandler(event) {
+    this.setVolumeButtonView(+event.target.value);
     this.onVolumeLevelClicked(+event.target.value);
 }
 
