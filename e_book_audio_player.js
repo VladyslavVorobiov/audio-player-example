@@ -6,6 +6,7 @@ const PLAY_BUTTON_APPEARANCE = 'M18 12L0 24V0';
 const PAUSE_BUTTON_APPEARANCE = 'M0 0h6v24H0zM12 0h6v24h-6z';
 const WRAPPER_NAME = '.ebook-audio-player-wrapper';
 const PLAYER_NAME = '.ebook-audio-player';
+const VOLUME_SLIDER_HEIGHT = 135;
 const HTML_LAYOUT = `
 <div class="ebook-audio-player">
     <div class="loading" style="display: none;">
@@ -166,6 +167,17 @@ class AudioPlayerConstructor {
         //TODO place your logic here on volume level clicked
     }
 
+    setVolumeSliderPosition() {
+        const enoughBottomSpace = (this.audioPlayerRef.getBoundingClientRect().bottom + VOLUME_SLIDER_HEIGHT) < window.innerHeight;
+    
+        if(enoughBottomSpace) {
+            this.volumeControlsRef.classList.add('bottom');
+            this.volumeControlsRef.classList.remove('top');
+        } else {
+            this.volumeControlsRef.classList.add('top');
+            this.volumeControlsRef.classList.remove('bottom');
+        }
+    }
 };
 
 function playPauseHandler() {
@@ -181,6 +193,7 @@ function playPauseHandler() {
 function volumeClickHandler() {
     this.volumeButtonRef.classList.toggle('opened');
     this.volumeControlsRef.classList.toggle('hidden');
+    this.setVolumeSliderPosition();
 }
 
 function progressChangesHandler(event) {

@@ -158,8 +158,6 @@
     background-color: rgba(0, 0, 0, 0.62);
     border-radius: 7px;
     position: absolute;
-    left: -3px;
-    bottom: 52px;
     flex-direction: column;
     align-items: center;
     display: flex;
@@ -171,7 +169,7 @@
 }
 
 .ebook-audio-player .volume .volume__controls.top {
-    bottom: 52px;
+    bottom: 42px;
     left: -3px; 
 }
 
