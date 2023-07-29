@@ -193,7 +193,14 @@ function playPauseHandler() {
 function volumeClickHandler() {
     this.volumeButtonRef.classList.toggle('opened');
     this.volumeControlsRef.classList.toggle('hidden');
+    this.volumeControlsRef.classList.toggle('opened');
     this.setVolumeSliderPosition();
+
+    if( this.volumeButtonRef.classList.contains('opened')) {
+        setTimeout(() => {
+            document.addEventListener('click', outsideVolumeHandler);
+        })
+    }
 }
 
 function progressChangesHandler(event) {
@@ -202,4 +209,25 @@ function progressChangesHandler(event) {
 
 function volumeLevelChangesHandler(event) {
     this.onVolumeLevelClicked(+event.target.value);
+}
+
+function outsideVolumeHandler(event) {
+    const volumeSliderClicked = event.target.classList.contains('volume__progress');
+    const volumeSliderContainerClicked = event.target.classList.contains('volume__controls');
+
+    if(!volumeSliderClicked && !volumeSliderContainerClicked) {
+        const openedVolumeSliderContainer = document.body.querySelector('.volume__controls.opened');
+        const openedVolumeButton = document.body.querySelector('.volume__button.opened');
+
+        if(openedVolumeSliderContainer) {
+            openedVolumeSliderContainer.classList.add('hidden');
+            openedVolumeSliderContainer.classList.remove('opened');
+        }
+
+        if(openedVolumeButton) {
+            openedVolumeButton.classList.remove('opened');
+        }
+
+        document.removeEventListener('click', outsideVolumeHandler);
+    }
 }
