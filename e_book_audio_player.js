@@ -199,6 +199,22 @@ class AudioPlayerConstructor {
                 break;
         }
     }
+
+    closeOtherVolumeSlider() {
+        const openedVolumeSliderContainer = document.body.querySelector('.volume__controls.opened');
+        const openedVolumeButton = document.body.querySelector('.volume__button.opened');
+    
+        if(openedVolumeSliderContainer && openedVolumeSliderContainer !== this.volumeControlsRef) {
+            openedVolumeSliderContainer.classList.add('hidden');
+            openedVolumeSliderContainer.classList.remove('opened');
+        }
+    
+        if(openedVolumeButton && openedVolumeButton !== this.volumeButtonRef) {
+            openedVolumeButton.classList.remove('opened');
+        }
+    
+        document.removeEventListener('click', outsideVolumeHandler);
+    }
 };
 
 function playPauseHandler() {
@@ -212,6 +228,8 @@ function playPauseHandler() {
 }
 
 function volumeClickHandler() {
+    this.closeOtherVolumeSlider();
+
     this.volumeButtonRef.classList.toggle('opened');
     this.volumeControlsRef.classList.toggle('hidden');
     this.volumeControlsRef.classList.toggle('opened');
